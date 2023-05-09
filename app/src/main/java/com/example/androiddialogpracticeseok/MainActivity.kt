@@ -1,9 +1,11 @@
 package com.example.androiddialogpracticeseok
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
@@ -23,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btnAlertDialog: Button = findViewById(R.id.btn_alert_dialog)
-        btnAlertDialog.setOnClickListener { view ->
+        btnAlertDialog.setOnClickListener {
             alertDialogFunction()
+        }
+
+        val btnCustomDialog : Button = findViewById(R.id.btn_custom_dialog)
+        btnCustomDialog.setOnClickListener{
+            customDialogFunction()
         }
     }
 
@@ -50,5 +57,22 @@ class MainActivity : AppCompatActivity() {
         // 바탕 눌렀을 때 취소 가능하게 할 건지 여부
         alertDialog.setCancelable(false)
         alertDialog.show()
+    }
+
+
+    private fun customDialogFunction() {
+        val customDialog = Dialog(this)
+        customDialog.setContentView(R.layout.dialog_custom)
+        customDialog.findViewById<TextView>(R.id.tv_submit).setOnClickListener {
+            Toast.makeText(applicationContext, "submit 눌렀다.", Toast.LENGTH_LONG).show()
+            customDialog.dismiss()
+        }
+
+        customDialog.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
+            Toast.makeText(applicationContext, "cancel 눌렀다.", Toast.LENGTH_LONG).show()
+            customDialog.dismiss()
+        }
+
+        customDialog.show()
     }
 }
